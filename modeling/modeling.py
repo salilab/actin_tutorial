@@ -2,6 +2,7 @@
 Script for integrative modeling of the actin/tropomodulin binding interface
 '''
 # Imports
+from __future__ import print_function
 import IMP
 import IMP.pmi
 import IMP.pmi.io
@@ -181,7 +182,7 @@ output_objects.append(emr)
 ###################### SAMPLING #####################
 #####################################################
 for i in IMP.atom.Selection(root_hier).get_selected_particles():
-    print i, IMP.core.RigidBody.get_is_setup(i), rb1, rb2
+    print(i, IMP.core.RigidBody.get_is_setup(i), rb1, rb2)
 # First shuffle all particles
 IMP.pmi.tools.shuffle_configuration(root_hier,
                                     max_translation=30)
@@ -189,9 +190,9 @@ IMP.pmi.tools.shuffle_configuration(root_hier,
 
 # Quickly move all flexible beads into place
 #dof.optimize_flexible_beads(100)
-print xlr.evaluate()
-print emr.evaluate()
-print sr.evaluate()
+print(xlr.evaluate())
+print(emr.evaluate())
+print(sr.evaluate())
 
 # Run replica exchange Monte Carlo sampling
 rex=IMP.pmi.macros.ReplicaExchange0(mdl,
@@ -207,6 +208,6 @@ rex=IMP.pmi.macros.ReplicaExchange0(mdl,
 # Ok, now we finally do the sampling!
 rex.execute_macro()
 
-print xlr.evaluate()
-print emr.evaluate()
-print sr.evaluate()
+print(xlr.evaluate())
+print(emr.evaluate())
+print(sr.evaluate())
