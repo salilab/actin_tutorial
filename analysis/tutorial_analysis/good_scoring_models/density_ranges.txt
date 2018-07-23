@@ -1,0 +1,1 @@
+density_custom_ranges={"Actin":['A'],"Gelsolin":[(1,126,'G')],"Tropomysin":[(145,324,'G')]}
