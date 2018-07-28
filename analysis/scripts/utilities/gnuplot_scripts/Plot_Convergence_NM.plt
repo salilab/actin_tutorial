@@ -5,14 +5,16 @@ set border lw 5 lc rgb "#484848"
 stats sprintf("%s.ChiSquare_Grid_Stats.txt", ARG1) usi 1 prefix "R"
 stats sprintf("%s.Sampling_Precision_Stats.txt", ARG1) usi 1 prefix "B"
 
-maxx = (int(R_max) - 0  - (10 + int(R_max))%10)
+maxx = (10+ int(R_max) - 0  - (10 + int(R_max))%10)
 max(a, b) = (a > b ? a : b)
 max0=max(maxx, B_max)
 
+print(R_max)
+print(maxx)
 set xr [0:max0]
 set yr [0:1.1]
 
-set xtics 0, maxx / 4, maxx tc rgb "#484848"
+set xtics 0, maxx / 5, maxx tc rgb "#484848"
 set ytics 0,0.25,1 tc rgb "#484848"
 set format y "%.2f"
 

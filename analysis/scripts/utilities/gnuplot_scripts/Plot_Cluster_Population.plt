@@ -27,15 +27,16 @@ stats sprintf("%s.Cluster_Population.txt", ARG1) usi 2 prefix "N1"
 stats sprintf("%s.Cluster_Population.txt", ARG1) usi 3 prefix "N2"
 
 maxy0=max(N1_max, N2_max)
-div = ceil(maxy0/2500)
-mod=int(maxy0)%2500
+div = ceil(maxy0/1000)
+mod=int(maxy0)%1000
 
-ymax=(div)*2500
+ymax=(div)*1000
 
 
 set yr [0:ymax]
 set ytics  0, ymax / 4, ymax nomirror
 
+set xtics rotate by -25
 
 stats sprintf("%s.Sampling_Precision_Stats.txt", ARG1) usi 2 prefix "B2"
 stats sprintf("%s.Sampling_Precision_Stats.txt", ARG1) usi 3 prefix "B3"

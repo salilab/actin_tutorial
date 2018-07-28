@@ -200,6 +200,7 @@ class GoodScoringModelSelector(object):
                             # Now get the printing criteria
                             printing_criteria_values=[]
                             for si,score_type in enumerate(printing_keywords_list):
+                                #print(si, score_type, fields_for_printing)
                                 score_value=float(dat[fields_for_printing[si]])
                                 printing_criteria_values.append(score_value)
                                 

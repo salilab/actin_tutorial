@@ -72,7 +72,7 @@ class GetModelDensity(object):
                         self.particle_indices_in_custom_ranges[density_name].append(index)
                         #print beadname,"is in",domain
                         break # already added particle to this custom range
-    
+
     def normalize_density(self):
         pass
    
