@@ -19,6 +19,13 @@ import IMP.pmi.dof
 import IMP.atom
 import IMP.saxs
 
+import sys
+
+test_mode=False
+if '--test' in sys.argv: test_mode=True
+
+num_frames=50000
+
 # Identify data files
 saxs_data = "./derived_data/saxs/4pki.pdb.0.15.dat"
 xl_data = "./derived_data/xl/derived_xls.dat"
@@ -217,7 +224,8 @@ rex=IMP.pmi.macros.ReplicaExchange0(mdl,
         output_objects=output_objects,          # Items in output_objects write information to the stat file.
         monte_carlo_steps=10,                   # Number of MC steps between writing frames
         number_of_best_scoring_models=0,        # set >0 to store best PDB files (but this is slow)
-        number_of_frames=50000)                    # Total number of frames to run / write to the RMF file.
+        number_of_frames=num_frames,            # Total number of frames to run / write to the RMF file.
+        test_mode=test_mode)                    # Run in test mode (don't write anything)
 
 # Ok, now we finally do the sampling!
 rex.execute_macro()
