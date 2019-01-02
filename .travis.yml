@@ -1,12 +1,13 @@
 # This is a template configuration file for Travis CI, for testing
 # your tutorial regularly. Copy it to .travis.yml in the top level
-# directory of your tutorial.
+# directory of your tutorial, in the master branch.
 
 sudo: false
 language: python
+dist: xenial
 python:
   - 2.7
-  - 3.6
+  - 3.7
 env:
   - IMP_BRANCH=develop
   - IMP_BRANCH=master
