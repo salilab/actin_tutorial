@@ -13,7 +13,7 @@ PMI is a top-down modeling system that relies on a series of macros and
 classes to simplify encoding of the modeling protocol, including designing the
 system representation, specifying scoring function, sampling alternative
 structures, analyzing the results, facilitating the creation of
-publication-ready figures, and depositing [into PDB-Dev](@ref deposition).
+publication-ready figures, and depositing [into PDB-Dev](@ref wwpdb).
 PMI exchanges the high flexibility of %IMP for ease-of-use, all within one short
 Python script (\<100 lines). Despite its simplicity in creating standard
 modeling workflows, PMI is powerful and extensible - it is built on %IMP and
