@@ -21,8 +21,6 @@ creates native %IMP objects, which means that the advanced user can customize
 many aspects of the modeling protocol. Below, we outline each stage of the
 modeling process as performed in PMI.
 
-\image html pmi_hierarchy.png "PMI Hierarchy. PMI is constructed as a top-down hierarchy beginning with a System. A system can contain one or more states with each state being a different conformation, composition or time-ordered step in the system. Each state is comprised of one or more molecules that may have one or more copies per molecule. At the final level, each molecule is represented at one or more resolutions." width=600px
-
 # Gathering information {#gatherinfo}
 
 Information about a system that we wish to model includes everything that we
@@ -31,8 +29,10 @@ fundamental physical principles. Experimental data that are commonly utilized
 in integrative modeling include X-ray crystal structures, EM density maps,
 NMR data, chemical crosslinks, yeast two-hybrid data,and Förster resonance
 energy transfer (FRET) measurements. Atomic resolution information may be
-applied directly as structural restraints from atomic statistical potentials
-and molecular mechanics force fields or derived from comparative modeling
+applied directly as structural restraints from
+[atomic statistical potentials](https://doi.org/10.1110/ps.062416606) and
+[molecular mechanics force fields](https://doi.org/10.1002/jcc.21287)
+or derived from comparative modeling
 programs such as [MODELLER](https://salilab.org/modeller/) and
 [PHYRE2](https://doi.org/10.1038/nprot.2015.053). Each piece of information
 can be utilized within the modeling procedure in one or more of five distinct
@@ -50,10 +50,24 @@ at that site. For example, a domain described by a crystal structure can be
 represented at atomic resolution and a disordered segment can be represented
 as a string of spherical beads of 10 residues each. In addition, non-particle
 based representations, such as Gaussian mixture models (GMMs),
-can also be used; for example, in EM density fitting. Choosing a
+can also be used; for example, in
+[EM density fitting](https://doi.org/10.1101/113951). Choosing a
 representation reflects a compromise between the need for details required
 by the biological application of the model and the need for coarseness
 required by limited computing power.
+
+\image html pmi_hierarchy.png width=600px
+
+\par PMI Hierarchy
+PMI is constructed as a top-down hierarchy beginning with a
+[System](@ref IMP::pmi::topology::System). A system can contain one or more
+[states](@ref IMP::pmi::topology::System::create_state)
+with each state being a different conformation, composition or time-ordered
+step in the system. Each state is comprised of one or more
+[molecules](@ref IMP::pmi::topology::State::create_molecule) that may have
+one or more copies per molecule. At the final level, each molecule is
+represented at one or more resolutions.
+
 
 Some of the input information is translated into restraints on the structure
 of the model. These spatial restraints are combined into a single scoring
@@ -62,21 +76,45 @@ agreement with the information. The scoring function defines a
 multi-dimensional landscape spanned by the model degrees of freedom; the
 good-scoring models on this landscape satisfy the input restraints.
 
-\image html representation.png "Ways of representing a single biomolecule. A: The complexity of a molecular system can be represented in four ways. An ensemble of states describes the structural heterogeneity around a single solution. Multiplestates are used to describe systems that exist in multiple thermodynamic wells. The system can be modeled at a multitude of scales commensurate with the different types of information known about it. Finally, individual states can be time-ordered, allowing for the modeling of the transition rates between them. B: Multiple representations can be simultaneously applied to the same biomolecule so that information of various types can be applied at the proper scale and form. The molecule is first defined by its sequence connectivity. Flexible beads comprising one or more residues are commonly applied to loops where no high-resolution structure is available. Areas that have high resolution structure can be modeled by spherical beads of 1 residue for the evaluation of residue-specific information such as chemical crosslinks or NMR distance restraints. 10-residue beads are generally used to model lower resolution information such as SAXS data and the excluded volume restraint. The molecule can be represented as a Gaussian mixture model for comparisons to EM densities. %IMP and PMI can utilize all of these representations simultaneously in a multi-scale model." width=600px
+\image html representation.png width=600px
+
+\par Ways of representing a single biomolecule
+**A:** The complexity of a molecular system can be represented in four ways.
+An ensemble of states describes the structural heterogeneity around a single
+solution. Multiple states are used to describe systems that exist in
+multiple thermodynamic wells. The system can be modeled at a multitude of
+scales commensurate with the different types of information known about it.
+Finally, individual states can be time-ordered, allowing for the modeling
+of the transition rates between them.
+**B:** Multiple representations can be simultaneously applied to the same
+biomolecule so that information of various types can be applied at the
+proper scale and form. The molecule is first defined by its sequence
+connectivity. Flexible beads comprising one or more residues are commonly
+applied to loops where no high-resolution structure is available. Areas that
+have high resolution structure can be modeled by spherical beads of 1
+residue for the evaluation of residue-specific information such as chemical
+crosslinks or NMR distance restraints. 10-residue beads are generally
+used to model lower resolution information such as SAXS data and the
+excluded volume restraint. The molecule can be represented as a Gaussian
+mixture model for comparisons to EM densities. %IMP and PMI can utilize
+all of these representations simultaneously in a multi-scale model.
 
 # Sampling {#sampling}
 
 In most cases, all possible models cannot be generated. Thus, we utilize
 sampling methods to search for models that agree with the input data
 according to the scoring function defined above (good-scoring models).
-One approach for sampling models in %IMP is a Monte Carlo algorithm,
-guided by our scoring function and accelerated via replica exchange.
+One approach for sampling models in %IMP is a
+[Monte Carlo algorithm](https://doi.org/10.1063/1.1699114),
+guided by our scoring function and accelerated *via*
+[replica exchange](https://doi.org/10.1103/PhysRevLett.57.2607).
 Other sampling methods can be utilized for specific cases.
 
-\note Other sampling methods include Rapidly Exploring Random Trees (RRT)
-      for searching dihedral space, divide-and-conquer message passing
-      methodsfor large discrete spaces, conjugate gradients and molecular
-      dynamics.
+\note Other sampling methods include
+      [Rapidly Exploring Random Trees (RRT)](https://doi.org/10.1016/j.bpj.2015.06.065)
+      for searching dihedral space,
+      [divide-and-conquer message passing methods](https://doi.org/10.1016/j.jmb.2009.02.031)
+      for large discrete spaces, conjugate gradients and molecular dynamics.
 
 # Analysis {#desanalysis}
 
@@ -92,7 +130,19 @@ which can result from inconsistent data or an unconsidered multiplicity
 of conformational states (in this case, the user may reformulate the
 representation by adding a state to the system).
 
-\image html analysis.png "Analysis pipeline. Analysis of sampling runs begins by filtering models that satisfy all input information. In step one, this set is split into two independent samples to assess the precision at which sampling is converged. If sampling has converged at a high enough precision, the resulting models can be assessed against the input information to identify potential multiple states.  Resampling can be performed by either systematically or randomly excluding data sets and rerunning the simulation and sampling convergence algorithms. The models can then be assessed against data that was not used in modeling. Finally, the models are assessed for logical sense in answering the original biological question." width=600px
+\image html analysis.png width=600px
+
+\par Analysis pipeline
+Analysis of sampling runs begins by filtering models that satisfy all
+input information. In step one, this set is split into two independent
+samples to assess the precision at which sampling is converged. If sampling
+has converged at a high enough precision, the resulting models can be
+assessed against the input information to identify potential multiple
+states.  Resampling can be performed by either systematically or randomly
+excluding data sets and rerunning the simulation and sampling convergence
+algorithms. The models can then be assessed against data that was not
+used in modeling. Finally, the models are assessed for logical sense
+in answering the original biological question.
 
 Given a set of good-scoring models, we must first estimate the precision
 at which sampling found these most good-scoring solutions (sampling precision).
@@ -119,7 +169,7 @@ in the finest clustering for which the structures from the two independent
 runs contribute proportionally to their size. In other words, the sampling
 precision is defined as the precision at which the two independent samples
 are statistically indistinguishable. The individual clusters for each sample
-are also compared visually to confirm similarity.
+are also [compared visually](@ref visualization) to confirm similarity.
 
 At this step, the model precision (uncertainty), which is represented by
 the variability among the good-scoring models, is also reported. This
@@ -139,10 +189,12 @@ similar to a crystallographic R<sub>free</sub>.
 
 A final validation is the presence of features in the model that are unlikely
 to occur by chance and/or are consistent with the biological context of the
-system. For example, a 16 fold symmetry was found in the model of the
+system. For example, a 16 fold symmetry
+[was found](https://doi.org/10.1038/nature06405) in the model of the
 Nuclear Pore Complex when only 8-fold symmetry had been enforced and the
-displacement of the aspartate sensor domain in a two state model of the
-histidine kinase PhoQ transmembrane signaling agreed with previous analysis.
+[displacement of the aspartate sensor domain](https://doi.org/10.1016/j.str.2014.04.019)
+in a two state model of the histidine kinase PhoQ transmembrane signaling
+agreed with previous analysis.
 
 A key feature of the [four-step procedure](@ref procedure) for integrative
 modeling is that it is iterative. Assessment may reveal a need to collect
@@ -159,10 +211,12 @@ Computational groups can more easily experiment with new scoring, sampling,
 and analysis methods, without having to reimplement the existing methods
 from scratch. Finally, the authors themselves will maximize the impact of
 their work, increasing the odds that their results are incorporated into
-future modeling. Following the recommendations of the wwPDB Hybrid/Integrative
-Methods Task Force in 2015, a prototype archive, PDB-Development
+future modeling. Following the
+[recommendations of the wwPDB Hybrid/Integrative Methods Task Force](https://doi.org/10.1016/j.str.2015.05.013)
+in 2015, a prototype archive, PDB-Development
 ([PDB-Dev](https://pdb-dev.wwpdb.org/)) was recently established to store
-integrative models and corresponding data. The mmCIF file format used to
+integrative models and corresponding data. The
+[mmCIF file format](http://mmcif.wwpdb.org/) used to
 archive regular atomic PDB structures was extended to support the description
 of integrative models, including information on the input data used, the
 modeling protocol, and the final output models. As of July 2018, PDB-Dev

@@ -9,7 +9,8 @@ Here, we demonstrate integrative modeling using the PMI interface by modeling
 the complex of actin and tropomodulin-gelsolin chimera using SAXS, EM,
 crosslinking, crystal structures of the individual domains, and physical
 principles. This complex was solved via X-ray crystallography at 2.3 Å
-resolution (PDB: 4PKI). We use this structure to simulate biophysical data
+resolution (PDB: [4PKI](https://www.rcsb.org/structure/4pki)). We use this
+structure to simulate biophysical data
 and assess the accuracy of the modeled complexes. In this simple exercise,
 we assume that we have a crystal structure of only the actin-gelsolin
 interface and would like to find the tropomyosin-actin binding interface.
@@ -39,14 +40,15 @@ Thirty-three simulated crosslinks were generated from a random subset of lysine 
 
 ## Electron Microscopy {#gatherem}
 A simulated EM density of the entire complex was created at 20Å resolution
-using %IMP. The simulated map is approximated as a Gaussian Mixture Model
-(GMM).
+using %IMP. The simulated map is approximated as a
+[Gaussian Mixture Model](https://doi.org/10.1529/biophysj.108.137125) (GMM).
 
 \note Simulated EM maps can be created map can be created in %IMP using the
       following command: `simulate_density_from_pdb <file.pdb> <output.mrc> <resolution> <a/pixel>`
 
 ## SAXS {#gathersaxs}
-A simulated SAXS profile of the entire 4pki.pdb complex was created using FoXS.
+A simulated SAXS profile of the entire 4pki.pdb complex was created using
+[FoXS](https://salilab.org/foxs/).
 
 ## Other information {#gatherother}
 We also define restraints such as excluded volume and sequence connectivity to
@@ -136,7 +138,8 @@ molecules = t.get_components()
 bs.add_state(t)
 \endcode
 
-We then execute the macro, which returns the `root_hier` root hierarchy and
+We then [execute the macro](@ref IMP::pmi::macros::BuildSystem::execute_macro),
+which returns the `root_hier` root hierarchy and
 `dof` degrees of freedom objects, which will be used later. Within the macro,
 we set the movement parameters of individual beads and rigid bodies.
 Translations (`trans`) are defined in angstroms and rotations (`rot`)
@@ -335,7 +338,8 @@ Raw output will be written to the `runX/output` folder, as specified in the
 replica exchange macro. Within this folder, stat files contain tabulated
 statistics for each frame. In the `rmf` directory, model coordinates for
 the lowest temperature replica are stored. These can be opened directly
-in Chimera and the "trajectories" observed.
+in [UCSF Chimera](https://www.rbvi.ucsf.edu/chimera/)
+and the "trajectories" observed.
 
 Next, on to
 [analysis of the actin complex models and deposition](@ref analysis).

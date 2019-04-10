@@ -189,8 +189,9 @@ of actin and tropomodulin-gelsolin chimera.**
 # Visualizing models {#visualization}
 
 The cluster RMF files and localization densities can be visualized using
-UCSF Chimera version \>= 1.13. Example scripts for visualizing all
-localization densities are provided in `analysis/scripts/chimera_scripts`.
+[UCSF Chimera](https://www.rbvi.ucsf.edu/chimera/) version \>= 1.13.
+Example scripts for visualizing all localization densities are provided
+in `analysis/scripts/chimera_scripts`.
 
 At this point, one must decide if the models are helpful in answering
 our biological questions. In the case of this tutorial, the PPI is
@@ -252,7 +253,7 @@ should indicate where the original raw data came from.
 
 ## Output models {#wwpdboutput}
 
-A decision needs to be made aboutwhich models to deposit. Generally,
+A decision needs to be made about which models to deposit. Generally,
 a representative sample of each cluster should be deposited, together
 with the localization densities of the entire cluster. The mmCIF file
 format allows for multiple models, potentially at multiple scales,
