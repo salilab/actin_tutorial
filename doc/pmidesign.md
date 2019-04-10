@@ -78,7 +78,7 @@ Other sampling methods can be utilized for specific cases.
       methodsfor large discrete spaces, conjugate gradients and molecular
       dynamics.
 
-# Analysis {#analysis}
+# Analysis {#desanalysis}
 
 The results of stochastic sampling (i.e., an ensemble of output structures
 and their respective scores) must be analyzed to estimate the sampling
@@ -149,7 +149,7 @@ modeling is that it is iterative. Assessment may reveal a need to collect
 more input data, or suggest future experiments, both by the researchers
 that constructed the initial model and by others.
 
-# Deposition {#deposition}
+# Deposition {#desdeposition}
 
 For the models, data, and modeling protocols to be generally useful, they
 must be reproducible and available to everyone in a publicly accessible

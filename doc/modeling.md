@@ -3,7 +3,7 @@ Integrative modeling of ADP-actin, gelsolin and C-terminal actin-binding domain 
 
 [TOC]
 
-# Intrduction {#modelintro}
+# Introduction {#modelintro}
 
 Here, we demonstrate integrative modeling using the PMI interface by modeling
 the complex of actin and tropomodulin-gelsolin chimera using SAXS, EM,
@@ -336,3 +336,6 @@ replica exchange macro. Within this folder, stat files contain tabulated
 statistics for each frame. In the `rmf` directory, model coordinates for
 the lowest temperature replica are stored. These can be opened directly
 in Chimera and the "trajectories" observed.
+
+Next, on to
+[analysis of the actin complex models and deposition](@ref analysis).
