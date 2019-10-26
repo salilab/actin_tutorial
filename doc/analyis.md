@@ -18,7 +18,7 @@ defines the prefix for the sampling output folders; `-sl`, which defines
 the stat file keywords (see below) that we wish to filter on; `-pl`,
 which specifies the keywords that will be written to the output file;
 `-alt` and `-aut`, which specify, respectively, the lower and upper threshold
-for each keyword in `-slt` hat define acceptance. The `-mlt`
+for each keyword in `-slt` that define acceptance. The `-mlt`
 and `-mut` keywords, which are optional, define thresholds for restraints made
 of multiple components (such as crosslinks).
 
