@@ -1,0 +1,77 @@
+Score-based convergence estimates completed
+Opening RMF file: selected_models_A.rmf3 with 384 frames
+Opening RMF file: selected_models_B.rmf3 with 144 frames
+Took 8.855898141860962 to collect all model coordinates
+Size of conformation matrix (528, 699, 3)
+(139128,)
+Conform 0
+Conform 10
+Conform 20
+Conform 30
+Conform 40
+Conform 50
+Conform 60
+Conform 70
+Conform 80
+Conform 90
+Conform 100
+Conform 110
+Conform 120
+Conform 130
+Conform 140
+Conform 150
+Conform 160
+Conform 170
+Conform 180
+Conform 190
+Conform 200
+Conform 210
+Conform 220
+Conform 230
+Conform 240
+Conform 250
+Conform 260
+Conform 270
+Conform 280
+Conform 290
+Conform 300
+Conform 310
+Conform 320
+Conform 330
+Conform 340
+Conform 350
+Conform 360
+Conform 370
+Conform 380
+Conform 390
+Conform 400
+Conform 410
+Conform 420
+Conform 430
+Conform 440
+Conform 450
+Conform 460
+Conform 470
+Conform 480
+Conform 490
+Conform 500
+Conform 510
+Conform 520
+Size of RMSD matrix (flattened): (139128,)
+Size of RMSD matrix (unpacked, N x N): (528, 528)
+Distance matrix calculation took 1485.0866248607635
+Size of Sample A: 384  ; Size of Sample B:  144 ; Total 528
+Calculating sampling precision
+Minimum and maximum pairwise model distances: 4.314294794754336e-07 30.301023069966067
+Clustering at thresholds: 1.0000004314294795 to 30.000000431429488 with step size 1.0
+    30 total steps
+Time to complete sampling precision grid:  9.31891918182373
+Clustering at threshold 4.000
+Contingency table: [[371. 139.]]
+Building model for cluster 0 with 510 members
+Loading model 1    :::   100 models took 0.08060097694396973 seconds
+Loading model 101    :::   100 models took 6.851200103759766 seconds
+Loading model 201    :::   100 models took 7.132516860961914 seconds
+Loading model 301    :::   100 models took 7.767372131347656 seconds
+Loading model 401    :::   100 models took 8.16609501838684 seconds
+Loading model 501    :::   100 models took 7.320848226547241 seconds

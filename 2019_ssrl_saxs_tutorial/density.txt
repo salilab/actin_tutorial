@@ -1,0 +1,5 @@
+Name, start_res, end_res, molecule_name
+actin, 1, 375, actin
+gelsolin, 1, 126, geltrop
+linker, 126, 144, geltrop
+tropo, 144, 324, geltrop
