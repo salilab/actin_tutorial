@@ -5,14 +5,15 @@ Analysis of the actin complex models and deposition {#analysis}
 
 Analysis is performed using scripts located in `analysis/scripts`.
 The already-generated sampling output will be analyzed here; it is contained
-in the folders `modeling/run1` and `modeling/run2`.
+in the compressed files `run1.zip` and `run2.zip` in the `modeling` folder
+(they should first be extracted to make `modeling/run1` and `modeling/run2`).
 
 Analysis is performed in a new directory: `analysis/tutorial_analysis`.
 
 # Filtering good scoring models {#filtering}
 
-The `select_good_scoring_models.py` script filters models based on score
-and parameter thresholds. In this script, required flags are: `-rd`, which
+The `imp_sampcon select_good` tool filters models based on score
+and parameter thresholds. In this tool, required flags are: `-rd`, which
 specifies the directory containing sampling output folders; `-rp`, which
 defines the prefix for the sampling output folders; `-sl`, which defines
 the stat file keywords (see below) that we wish to filter on; `-pl`,
@@ -23,7 +24,7 @@ and `-mut` keywords, which are optional, define thresholds for restraints made
 of multiple components (such as crosslinks).
 
 \note A list of acceptable stat file keywords can be determined by running
-      `../scripts/plot_stat.py ./path/to/stat/file -pk`
+      `imp_sampcon show_stat ./path/to/stat/file`
 
 Here, we first use crosslink satisfaction as an initial filtering criterion
 because we usually have an *a priori* estimate of the false positive rate
@@ -37,7 +38,7 @@ that connectivity, crosslink data score, excluded volume, EM, SAXS and
 total scores be printed as well.
 
 \code{.sh}
-python ../scripts/select_good_scoring_models.py -rd ../../modeling -rp run \
+imp_sampcon select_good -rd ../../modeling -rp run \
        -sl "CrossLinkingMassSpectrometryRestraint_Distance_" \
        -pl ConnectivityRestraint_None \
        CrossLinkingMassSpectrometryRestraint_Data_Score \
@@ -46,22 +47,22 @@ python ../scripts/select_good_scoring_models.py -rd ../../modeling -rp run \
 \endcode
 
 This script creates a directory `filter` and a file,
-`filter/models_scores_ids.txt`, that contains the model index, its run,
+`filter/model_ids_scores.txt`, that contains the model index, its run,
 replicaID, frame ID, scores, and sample ID for each model. We can now use
 the script `plot_score.py` to plot the distribution of SAXS, EM, connectivity
 and excluded volume scores from this first set of filtered models to
 determine a reasonable threshold for accepting or rejecting a model.
 
 \code{.sh}
-python ../scripts/plot_score.py ./filter/model_ids_scores.txt \
+imp_sampcon plot_score ../../modeling/filter/model_ids_scores.txt \
        SAXSRestraint_Score
 
-python ../scripts/plot_score.py ./filter/model_ids_scores.txt \
+imp_sampcon plot_score ../../modeling/filter/model_ids_scores.txt \
        GaussianEMRestraint_None
 \endcode
 
-The resulting histograms (`SAXSRestraint_score.jpg` and
-`GaussianEMRestraint_None.jpg`) are roughly Gaussian. Based on these
+The resulting histograms (`SAXSRestraint_score.png` and
+`GaussianEMRestraint_None.png`) are roughly Gaussian. Based on these
 distributions we set our criteria for good scoring models as those whose EM
 and SAXS scores are \>1 standard deviation below the mean, except for
 connectivity, which is well satisfied in almost all models and EM, which
@@ -75,7 +76,7 @@ SAXS, 1.0 for connectivity and 4.916 for excluded volume.
       "good scoring model" should be carefully thought out by the modeler
       and reported in the text.
 
-We rerun `select_good_scoring_models.py` adding the extra keywords and
+We rerun `imp_sampcon select_good` adding the extra keywords and
 score thresholds. We add the extra flag, `-e`, to extract Rich Molecular Format
 (RMF) files of all good scoring models. These thresholds return 1618 good
 scoring models.
@@ -91,7 +92,7 @@ scoring models.
       convergence protocol. 
 
 \code{.sh}
-python../scripts/select_good_scoring_models.py -rd ../../modeling -rp run \
+imp_sampcon select_good -rd ../../modeling -rp run \
        -sl "CrossLinkingMassSpectrometryRestraint_Distance_" \
        GaussianEMRestraint_None SAXSRestraint_Score ConnectivityRestraint_None \
        ExcludedVolumeSphere_None -pl ConnectivityRestraint_None \
@@ -109,8 +110,8 @@ and sample ID for each model.
 
 # Determining sampling precision, clustering, and computing localization densities {#sampprec}
 
-The `Master_Sampling_Exhaustiveness_Analysis.py` script is used to
-calculate the sampling precision of the modeling. During this step,
+The `imp_sampcon exhaust` tool is used to calculate the sampling precision
+at which the modeling is exhaustive. During this step,
 multiple tests for convergence are performed on the two samples
 [determined above](@ref filtering), models are clustered,
 and localization densities are computed.
@@ -123,17 +124,15 @@ molecule and one each for the structured residues of each of the other
 two molecules.
 
 \code{.py}
-density_custom_ranges={"Actin":['A'],
-                       "Gelsolin":[(1,126,'G')],
-                       "Tropomysin":[(145,324,'G')]}
+density_custom_ranges={"Actin":['actin'],"Gelsolin":[(1,126,'geltrop')],"Tropomysin":[(145,324,'geltrop')]}
 \endcode
 
-We now run the script for testing sampling exhaustiveness.
+We now run the command for testing sampling exhaustiveness.
 
 \code{.sh}
-python ../scripts/Master_Sampling_Exhaustiveness_Analysis.py \
-       -n actin –p good_scoring_models/ -d density_ranges.txt -m cpu_omp \
-       -c 8 -a -g 0.1
+imp_sampcon exhaust \
+       -n actin -p ../../modeling/good_scoring_models/ -d density_ranges.txt \
+       -m cpu_omp -c 8 -a -g 0.1
 \endcode
 
 The system name, `actin`, defines the labels for the output files.
@@ -161,8 +160,11 @@ The results of the convergence tests are summarized in the output figure,
 3.5Å, with one dominant cluster, one minor cluster and one cluster of
 insignificant size. Text files containing this information are also produced.
 (The output of the protocol can be readily plotted using any plotting software.
-Example scripts in `analysis/scripts/gnuplot_scripts` can be used
-to obtain the same plots).
+Scripts for gnuplot are included in the %IMP distribution; print
+`IMP.sampcon.get_data_path('gnuplot_scripts')` from a Python intepreter to
+find the folder containing them, or add `--gnuplot` to the
+`imp_sampcon exhaust` invocation to automatically run them at the end of the
+protocol.)
 
 Output also includes localization densities for each cluster, which are
 contained in separate directories (`cluster.0`, `cluster.1`, ...). Within
@@ -176,9 +178,10 @@ file.
       to visualize. In that case, the skip option (`-s`) along with the value
       of clustering threshold (`-ct`) allows one to bypass RMSD and sampling
       precision calculation and get the clusters and their densities, as
-      follows: `python ../scripts/Master_Sampling_Exhaustiveness_Analysis.py -n 
-      actin -d density_custom.txt -ct 4.39 -a -s`. Note that this clustering
-      threshold should always be worse than the sampling precision.
+      follows:
+      `imp_sampcon exhaust -n actin -d density_custom.txt -ct 4.39 -a -s`.
+      Note that this clustering threshold should always be worse than the
+      sampling precision.
 
 \image html sampling.png width=600px
 
@@ -191,7 +194,8 @@ of actin and tropomodulin-gelsolin chimera.**
 The cluster RMF files and localization densities can be visualized using
 [UCSF Chimera](https://www.rbvi.ucsf.edu/chimera/) version \>= 1.13.
 Example scripts for visualizing all localization densities are provided
-in `analysis/scripts/chimera_scripts`.
+in the %IMP distribution; print `IMP.sampcon.get_data_path('chimera_scripts')`
+from a Python intepreter to find the folder containing them.
 
 At this point, one must decide if the models are helpful in answering
 our biological questions. In the case of this tutorial, the PPI is
