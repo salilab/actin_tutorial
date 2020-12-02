@@ -15,6 +15,7 @@ import IMP.pmi.restraints.saxs
 import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints.em
 import IMP.pmi.dof
+import ihm.cross_linkers
 import IMP.atom
 import IMP.saxs
 
@@ -265,12 +266,13 @@ xldb.create_set_from_file(file_name=xl_data,
 
 xlr = IMP.pmi.restraints.crosslinking.CrossLinkingMassSpectrometryRestraint(
                 root_hier=root_hier,    # Must pass the root hierarchy to the system
-                CrossLinkDataBase=xldb, # The crosslink database.
+                database=xldb,          # The crosslink database.
                 length=25,              # The crosslinker plus side chain length
                 resolution=1,           # The resolution at which to evaluate the crosslink
-                slope=0.000001,           # This adds a linear term to the scoring function 
+                slope=0.000001,         # This adds a linear term to the scoring function 
                                         #   to bias crosslinks towards each other
-                weight=xl_weight)       # Scaling factor for the restraint score.
+                weight=xl_weight,       # Scaling factor for the restraint score.
+                linker=ihm.cross_linkers.dss) # The linker chemistry
 
 xlr.add_to_model()
 output_objects.append(xlr)
