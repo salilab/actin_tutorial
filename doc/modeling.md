@@ -22,7 +22,7 @@ The entire modeling protocol is summarized in the four-stage diagram below:
 
 To follow this tutorial, first download the data files, either by
 [cloning the GitHub repository](https://github.com/salilab/actin_tutorial)
-or by [downloading the zip file](https://github.com/salilab/actin_tutorial/archive/master.zip).
+or by [downloading the zip file](https://github.com/salilab/actin_tutorial/archive/main.zip).
 
 # Gathering and preparing information {#gatherdata}
 
