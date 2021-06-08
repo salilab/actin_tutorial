@@ -29,3 +29,4 @@ jobs:
         eval "$(conda shell.bash hook)"
         conda activate python${{ matrix.python-version }}
         pytest support/test/*.py -v
+        flake8 --extend-exclude derived_data,best.scores.rex.py modeling support/test
