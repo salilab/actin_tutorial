@@ -301,7 +301,6 @@ line of the script executes the sampling macro.
 \code{.py}
 rex=IMP.pmi.macros.ReplicaExchange0(mdl,
         root_hier=root_hier,           # the system root hierarchy
-        crosslink_restraints= [xlr],   # This allows viewing of crosslinks in Chimera
         monte_carlo_sample_objects=dof.get_movers(), # all objects to be moved
         global_output_directory='run1/'  # Set the output directory for this run.
         output_objects=output_objects,   # Write these items to the stat file

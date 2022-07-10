@@ -241,8 +241,6 @@ rex = IMP.pmi.macros.ReplicaExchange0(
     mdl,
     # pass the root hierarchy
     root_hier=root_hier,
-    # This allows viewing the crosslinks in Chimera
-    crosslink_restraints=[xlr],
     # pass all objects to be moved ( almost always dof.get_movers() )
     monte_carlo_sample_objects=dof.get_movers(),
     # The output directory for this sampling run.
