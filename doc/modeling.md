@@ -293,13 +293,13 @@ sr.add_to_model()
 \endcode
 
 We implement a Monte Carlo sampling scheme with replica exchange using the PMI
-[ReplicaExchange0](@ref IMP::pmi::macros::ReplicaExchange0) macro. Within
+[ReplicaExchange](@ref IMP::pmi::macros::ReplicaExchange) macro. Within
 this macro, we set the directory where all output files will be placed,
 `global_output_directory`, and the `number_of_frames` to generate. The final
 line of the script executes the sampling macro.
 
 \code{.py}
-rex=IMP.pmi.macros.ReplicaExchange0(mdl,
+rex=IMP.pmi.macros.ReplicaExchange(mdl,
         root_hier=root_hier,           # the system root hierarchy
         monte_carlo_sample_objects=dof.get_movers(), # all objects to be moved
         global_output_directory='run1/'  # Set the output directory for this run.
