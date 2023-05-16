@@ -225,20 +225,25 @@ xldb.create_set_from_file(file_name=xl_data, converter=xldbkc)
 
 Using this database, we can construct the crosslinking restraint. We input
 the root hierarchy of the system and the database, and specify the length
-of the crosslinker. The restraint can be evaluated at any resolution,
-though is generally most informative at resolution = 1. The length
+and chemistry of the crosslinker. The restraint can be evaluated at any
+resolution, though is generally most informative at resolution = 1. The length
 determines the inflection point of the scoring function sigmoid and
 is generally set to 10Å+ the crosslinker length for Lys-Lys crosslinkers.
+
+The crosslinker chemistry is not used in the modeling, but it is written into
+the output file metadata, which can be used for validation or deposition.
 
 \code{.py}
 xlr = IMP.pmi.restraints.crosslinking.CrossLinkingMassSpectrometryRestraint(
                 root_hier=root_hier,    # Must pass the system root hierarchy
-                CrossLinkDataBase=xldb, # The crosslink database.
+                database=xldb,          # The crosslink database.
                 length=25,              # The crosslinker plus side chain length
-                resolution=1,           # The resolution to evaluate the crosslink
-                slope=0.0001,           # This adds a linear term to the score
+                resolution=1,           # The resolution at which to evaluate the crosslink
+                slope=0.0001,           # This adds a linear term to the scoring function
                                         # to bias crosslinks towards each other
-                weight=10)              # Scaling factor for the restraint score.
+                weight=10,              # Scaling factor for the restraint score.
+                linker=ihm.cross_linkers.dss)  # The linker chemistry
+
 
 output_objects.append(xlr)
 \endcode
