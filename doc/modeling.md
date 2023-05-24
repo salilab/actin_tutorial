@@ -343,6 +343,7 @@ replica exchange macro. Within this folder, stat files contain tabulated
 statistics for each frame. In the `rmf` directory, model coordinates for
 the lowest temperature replica are stored. These can be opened directly
 in [UCSF Chimera](https://www.rbvi.ucsf.edu/chimera/)
+or [ChimeraX](https://www.cgl.ucsf.edu/chimerax/)
 and the "trajectories" observed.
 
 Next, on to
