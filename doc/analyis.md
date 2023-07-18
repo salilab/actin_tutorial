@@ -3,7 +3,7 @@ Analysis of the actin complex models and deposition {#analysis}
 
 [TOC]
 
-Analysis is performed using scripts located in `analysis/scripts`.
+Analysis is performed using the `IMP.sampcon` module.
 The already-generated sampling output will be analyzed here; it is contained
 in the compressed files `run1.zip` and `run2.zip` in the `modeling` folder
 (they should first be extracted to make `modeling/run1` and `modeling/run2`).
