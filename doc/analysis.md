@@ -40,9 +40,9 @@ total scores be printed as well.
 \code{.sh}
 imp_sampcon select_good -rd ../../modeling -rp run \
        -sl "CrossLinkingMassSpectrometryRestraint_Distance_" \
-       -pl ConnectivityRestraint_None \
+       -pl ConnectivityRestraint_Score \
        CrossLinkingMassSpectrometryRestraint_Data_Score \
-       ExcludedVolumeSphere_None GaussianEMRestraint_None SAXSRestraint_Score \
+       ExcludedVolumeSphere_Score GaussianEMRestraint_None SAXSRestraint_Score \
        Total_Score -alt 1.0 -aut 1.0 -mlt 0.0 -mut 30.0
 \endcode
 
@@ -66,7 +66,7 @@ The resulting histograms (`SAXSRestraint_score.png` and
 distributions we set our criteria for good scoring models as those whose EM
 and SAXS scores are \>1 standard deviation below the mean, except for
 connectivity, which is well satisfied in almost all models and EM, which
-has a large tail. Our high score thresholds are 2.0 for EM, and 4.554 for
+has a large tail. Our high score thresholds are -7.0 for EM, and 0.3 for
 SAXS, 1.0 for connectivity and 4.916 for excluded volume.
 
 \note Currently, the choice of filtering criteria is very subjective.
@@ -78,7 +78,7 @@ SAXS, 1.0 for connectivity and 4.916 for excluded volume.
 
 We rerun `imp_sampcon select_good` adding the extra keywords and
 score thresholds. We add the extra flag, `-e`, to extract Rich Molecular Format
-(RMF) files of all good scoring models. These thresholds return 1618 good
+(RMF) files of all good scoring models. These thresholds return 1582 good
 scoring models.
 
 \note In general, we require at least 1000 or more models for assessing
@@ -94,11 +94,12 @@ scoring models.
 \code{.sh}
 imp_sampcon select_good -rd ../../modeling -rp run \
        -sl "CrossLinkingMassSpectrometryRestraint_Distance_" \
-       GaussianEMRestraint_None SAXSRestraint_Score ConnectivityRestraint_None \
-       ExcludedVolumeSphere_None -pl ConnectivityRestraint_None \
+       GaussianEMRestraint_None SAXSRestraint_Score \
+       ConnectivityRestraint_Score \
+       ExcludedVolumeSphere_Score -pl ConnectivityRestraint_Score \
        CrossLinkingMassSpectrometryRestraint_Data_Score \
-       ExcludedVolumeSphere_None Total_Score -alt 1.0 -50 -50.0 0.0 0.0 \
-       -aut 1.0 2.0 4.554 1.0 4.916 -mlt 0.0 0.0 0.0 0.0 0.0 \
+       ExcludedVolumeSphere_Score Total_Score -alt 1.0 -50 -50.0 0.0 0.0 \
+       -aut 1.0 -7.0 0.3 1.0 4.916 -mlt 0.0 0.0 0.0 0.0 0.0 \
        -mut 30.0 0.0 0.0 0.0 0.0 -e
 \endcode
 
