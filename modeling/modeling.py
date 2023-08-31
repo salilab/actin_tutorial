@@ -52,7 +52,7 @@ mdl = IMP.Model()
 t = IMP.pmi.topology.TopologyReader(topology_file)
 
 # Create a BuildSystem macro to add a state from a topology file
-bs = IMP.pmi.macros.BuildSystem(mdl)
+bs = IMP.pmi.macros.BuildSystem(mdl, name='Modeling of actin')
 bs.add_state(t)
 
 # executing the macro will return the root hierarchy and degrees of

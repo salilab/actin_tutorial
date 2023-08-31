@@ -42,7 +42,7 @@ saxs_weight = 10.0
 mdl = IMP.Model()
 
 # In PMI, we create our top-level System within the model
-sys = IMP.pmi.topology.System(mdl)
+sys = IMP.pmi.topology.System(mdl, name='Modeling of actin')
 
 # Each System must consist of one or more States.
 st = sys.create_state()
