@@ -47,7 +47,7 @@ sys = IMP.pmi.topology.System(mdl)
 # Each System must consist of one or more States.
 st = sys.create_state()
 
-# Create the molecules within each state, where each molecule defined by
+# Create the molecules within each state, where each molecule is defined by
 # a single peptide sequence.
 # Here, we have two: Actin and a chimera of Gelsolin and Tropomyosin (geltrop)
 actin = st.create_molecule("A", sequence=sequences["actin"])

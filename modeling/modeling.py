@@ -51,7 +51,7 @@ mdl = IMP.Model()
 # Read the topology file for a given state
 t = IMP.pmi.topology.TopologyReader(topology_file)
 
-# Create a BuildSystem macro to and add a state from a topology file
+# Create a BuildSystem macro to add a state from a topology file
 bs = IMP.pmi.macros.BuildSystem(mdl)
 bs.add_state(t)
 
