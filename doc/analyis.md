@@ -161,7 +161,7 @@ The results of the convergence tests are summarized in the output figure,
 insignificant size. Text files containing this information are also produced.
 (The output of the protocol can be readily plotted using any plotting software.
 Scripts for gnuplot are included in the %IMP distribution; print
-`IMP.sampcon.get_data_path('gnuplot_scripts')` from a Python intepreter to
+`IMP.sampcon.get_data_path('gnuplot_scripts')` from a Python interpreter to
 find the folder containing them, or add `--gnuplot` to the
 `imp_sampcon exhaust` invocation to automatically run them at the end of the
 protocol.)
@@ -197,7 +197,7 @@ or [UCSF ChimeraX](https://www.cgl.ucsf.edu/chimerax/) with the RMF plugin
 (available from the [ChimeraX toolshed](https://cxtoolshed.rbvi.ucsf.edu/)).
 Example scripts for visualizing all localization densities are provided
 in the %IMP distribution; print `IMP.sampcon.get_data_path('chimera_scripts')`
-from a Python intepreter to find the folder containing them.
+from a Python interpreter to find the folder containing them.
 
 At this point, one must decide if the models are helpful in answering
 our biological questions. In the case of this tutorial, the PPI is
