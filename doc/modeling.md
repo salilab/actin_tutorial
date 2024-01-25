@@ -132,9 +132,8 @@ corresponding to the representation defined in the topology file using
 
 \code{.py}
 mdl = IMP.Model()
-bs = IMP.pmi.macros.BuildSystem(mdl, resolutions=[1,10])
-t = IMP.pmi.topology.TopologyReader(topology.txt)
-molecules = t.get_components()
+t = IMP.pmi.topology.TopologyReader(topology_file)
+bs = IMP.pmi.macros.BuildSystem(mdl, name='Modeling of actin')
 bs.add_state(t)
 \endcode
 
