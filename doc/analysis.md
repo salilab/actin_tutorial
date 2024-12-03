@@ -225,8 +225,8 @@ model ensemble, as [discussed earlier](@ref desanalysis).
 For our modeling to be reproducible - a key requirement for the 4-stage
 [modeling procedure](@ref procedure) and for science in general -
 the modeling protocol, all of the input data we used, and the final output
-models, should be deposited in a public location, ideally the nascent
-[PDB-Dev repository](https://pdb-dev.wwpdb.org/).
+models, should be deposited in a public location, ideally the
+[PDB-IHM repository](https://pdb-ihm.org/).
 
 ## Modeling protocol {#wwpdbprotoc}
 
@@ -273,5 +273,5 @@ The functionality will extract information from the RMF files output by the
 %IMP modeling and combine it with metadata extracted from each experimental
 input. This file can be visualized in
 [UCSF ChimeraX](https://www.rbvi.ucsf.edu/chimerax/),
-and similar files from real modeling runs can be deposited in PDB-Dev
+and similar files from real modeling runs can be deposited in PDB-IHM
 and cited in publications.
